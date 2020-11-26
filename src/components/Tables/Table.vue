@@ -19,12 +19,15 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { SampleTable } from '@/types';
+import tableApi from '@/apis/table'
 
 export default defineComponent({
   name: "Table",
   props: {},
   data() {
       return {
+          loading: true,
+          errored: false,
           tableData: [
               {
                   col1: "#1",
@@ -39,6 +42,17 @@ export default defineComponent({
           ] as SampleTable[]
       }
   },
+  mounted() {
+    tableApi.getSample()
+    .then(response => {
+      this.tableData = response.data
+    })
+    .catch(error => {
+      console.log(error)
+      this.errored = true
+    })
+    .finally(() => this.loading = false)
+  }
 });
 </script>
 
