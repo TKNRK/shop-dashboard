@@ -11,9 +11,6 @@ export default defineComponent({
   name: 'TableView',
   components: {
     Table
-  },
-  // data should be stored using vuex
-  computed: {},
-  methods: {}
+  }
 });
 </script>
